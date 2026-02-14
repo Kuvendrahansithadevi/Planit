@@ -1,0 +1,218 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#e9e9e9;
+    padding:30px;
+}
+
+.container{
+    background:#f6f6f6;
+    border-radius:20px;
+    padding:30px;
+}
+
+/* ===== Navbar ===== */
+
+.navbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:40px;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size:30px;
+    font-weight:600;
+}
+
+.logo-img{
+    width: 40px;
+    height: 35px;
+    
+}
+
+.nav-links{
+    display:flex;
+    gap:20px;
+    align-items:center;
+}
+
+.nav-links button{
+    padding:8px 18px;
+    border-radius:20px;
+    border:none;
+    cursor:pointer;
+}
+
+.active-btn{
+    background:#1f2742;
+    color:white;
+}
+
+.profile-btn{
+    border:1px solid #1f2742;
+    background:transparent;
+}
+
+/* ===== Layout ===== */
+
+.main{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:40px;
+}
+
+/* ===== Left Section ===== */
+
+.welcome h2{
+    font-weight:500;
+    color:#777;
+}
+
+.welcome h1{
+    margin:10px 0;
+}
+
+.add-btn{
+    background:#1f2742;
+    color:white;
+    padding:10px 20px;
+    border-radius:25px;
+    border:none;
+    cursor:pointer;
+    margin-top:15px;
+}
+
+/* Circle Graph */
+
+.progress{
+    width:220px;
+    height:220px;
+    border-radius:50%;
+    background:conic-gradient(#1f2742 0% 60%, #d3d3d3 60% 100%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-top:40px;
+}
+
+.progress span{
+    background:#f6f6f6;
+    width:150px;
+    height:150px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+    font-weight:600;
+}
+
+/* Upcoming Card */
+
+.upcoming{
+    margin-top:40px;
+}
+
+.upcoming h3{
+    margin-bottom:20px;
+}
+
+.slider{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.arrow{
+    font-size:24px;
+    cursor:pointer;
+    color:#333;
+}
+
+.task-card{
+    width:220px;
+    height:250px;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow: 8px 8px 0px #d3d3d3;
+}
+
+.task-card img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.view-btn{
+    margin-top:15px;
+    padding:6px 16px;
+    border-radius:20px;
+    border:1px solid #aaa;
+    background:transparent;
+    cursor:pointer;
+    font-size:12px;
+}
+
+
+/* ===== Right Section ===== */
+
+.calendar{
+    background:white;
+    padding:20px;
+    border-radius:20px;
+}
+
+.calendar h3{
+    margin-bottom:15px;
+}
+
+.days{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:8px;
+}
+
+.day{
+    padding:8px;
+    text-align:center;
+    border-radius:8px;
+    background:#f0f0f0;
+    font-size:13px;
+}
+
+.day.active{
+    background:#1f2742;
+    color:white;
+}
+
+.completed{
+    margin-top:30px;
+}
+
+.task{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:15px 0;
+}
+
+.dot{
+    width:10px;
+    height:10px;
+    background:gold;
+    border-radius:50%;
+}
+
+.task span{
+    font-size:13px;
+    color:#555;
+}

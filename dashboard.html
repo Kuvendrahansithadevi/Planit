@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planit Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="dashboard.css">
+
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo"><img src="C:\Users\hansi\OneDrive\Desktop\planit\Plogo.jpeg" alt="planit logo" class="logo-img">Planit</div>
+        <div class="nav-links">
+            <button class="active-btn">Dashboard</button>
+            <button>About</button>
+            <button>Services</button>
+            <button class="profile-btn">Profile ↗</button>
+        </div>
+    </div>
+
+    <!-- Main Layout -->
+    <div class="main">
+
+        <!-- Left -->
+        <div>
+            <div class="welcome">
+                <h2>Hello ,Hansitha</h2>
+                <h1>You got 7 tasks today..!</h1>
+                <button class="add-btn">+ Add Tasks</button>
+            </div>
+
+            <!-- Progress Graph -->
+            <div class="progress">
+                <span>60%</span>
+            </div>
+
+            <!-- Upcoming -->
+        <div class="upcoming">
+    <h3>Upcoming Tasks</h3>
+
+    <div class="slider">
+        <span class="arrow">&#10094;</span>
+
+        <div class="task-card">
+            <img src="C:\Users\hansi\OneDrive\Desktop\planit\bdaycat.jpeg" alt="Birthday Task">
+        </div>
+
+        <span class="arrow">&#10095;</span>
+    </div>
+
+    <button class="view-btn">View all ↗</button>
+</div>
+
+        </div>
+        <!-- Right -->
+        <div>
+          
+<style>
+body{
+  font-family: Arial, sans-serif;
+  background:#f3f4f6;
+  display:flex;
+  justify-content:center;
+  margin-top:40px;
+}
+
+.calendar-wrapper{
+  width:360px;
+  background:#ffffff;
+  padding:20px;
+  border-radius:25px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.1);
+  text-align:center;
+}
+
+.title{
+  margin:0;
+  font-size:22px;
+}
+
+.top-info{
+  display:flex;
+  justify-content:space-between;
+  font-size:14px;
+  color:#555;
+  margin:8px 0 15px 0;
+}
+
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:10px;
+}
+
+.header button{
+  background:#e5e7eb;
+  border:none;
+  padding:5px 10px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.header button:hover{
+  background:#d1d5db;
+}
+
+.weekdays, .days{
+  display:grid;
+  grid-template-columns:repeat(7,1fr);
+  gap:6px;
+}
+
+.weekdays div{
+  font-weight:bold;
+  font-size:13px;
+  color:#888;
+}
+
+.days div{
+  padding:10px;
+  border-radius:10px;
+  cursor:pointer;
+  background:#f3f4f6;
+}
+
+.days div:hover{
+  transform:scale(1.05);
+}
+
+/* Status Colors */
+.completedays{
+  background:#22c55e;
+  color:white;
+}
+
+.incompletedays{
+  background:black;
+  color:white;
+}
+
+.upcomingdays{
+  background:#facc15;
+  color:black;
+}
+
+.today{
+  border:2px solid #3b82f6;
+}
+
+.legend{
+  margin-top:15px;
+  font-size:13px;
+  text-align:left;
+}
+
+.legend div{
+  margin:4px 0;
+}
+
+.dot{
+  height:10px;
+  width:10px;
+  display:inline-block;
+  border-radius:50%;
+  margin-right:6px;
+}
+
+.dot.completed{ background:#22c55e; }
+.dot.upcoming{ background:#facc15; }
+.dot.incomplete{ background:black; }
+</style>
+<div class="calendar-wrapper">
+
+  <h2 class="title">Monthly calendar</h2>
+  <div class="top-info">
+    <span id="fullDate"></span>
+    <span id="liveTime"></span>
+  </div>
+
+  <div class="header">
+    <button id="prev">❮</button>
+    <h3 id="monthYear"></h3>
+    <button id="next">❯</button>
+  </div>
+
+  <div class="weekdays">
+    <div>Sun</div><div>Mon</div><div>Tue</div>
+    <div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+  </div>
+
+  <div id="days" class="days"></div>
+
+  <div class="legend">
+    <div><span class="dot completed"></span> Tasks Completed</div>
+    <div><span class="dot upcoming"></span> Upcoming Tasks</div>
+    <div><span class="dot incomplete"></span> Incomplete Tasks</div>
+  </div>
+
+</div>
+
+<script>
+const monthYear = document.getElementById("monthYear");
+const daysContainer = document.getElementById("days");
+const fullDate = document.getElementById("fullDate");
+const liveTime = document.getElementById("liveTime");
+
+let date = new Date();
+
+/* Example Task Status Data */
+const completedDays = [1,2,8,9,15,19,20,27,29];
+const incompleteDays = [12,23];
+const upcomingDays = [31];
+
+function renderCalendar(){
+  const year = date.getFullYear();
+  const month = date.getMonth();
+
+  const firstDay = new Date(year, month, 1).getDay();
+  const lastDate = new Date(year, month + 1, 0).getDate();
+
+  const months = [
+    "January","February","March","April","May","June",
+    "July","August","September","October","November","December"
+  ];
+
+  monthYear.innerText = months[month] + " " + year;
+  daysContainer.innerHTML = "";
+
+  for(let i=0;i<firstDay;i++){
+    daysContainer.innerHTML += "<div></div>";
+  }
+
+  for(let day=1; day<=lastDate; day++){
+    let className = "";
+
+    if(completedDays.includes(day)) className="completedays";
+    if(incompleteDays.includes(day)) className="incompletedays";
+    if(upcomingDays.includes(day)) className="upcomingdays";
+
+    const now = new Date();
+    if(day===now.getDate() && month===now.getMonth() && year===now.getFullYear()){
+      className += " today";
+    }
+
+    daysContainer.innerHTML += `<div class="${className}">${day}</div>`;
+  }
+}
+
+document.getElementById("prev").onclick = ()=>{
+  date.setMonth(date.getMonth()-1);
+  renderCalendar();
+};
+
+document.getElementById("next").onclick = ()=>{
+  date.setMonth(date.getMonth()+1);
+  renderCalendar();
+};
+
+/* Live Date & Time */
+function updateDateTime(){
+  const now = new Date();
+  fullDate.innerText = now.toDateString();
+  liveTime.innerText = now.toLocaleTimeString();
+}
+setInterval(updateDateTime,1000);
+
+updateDateTime();
+renderCalendar();
+</script>
+</div>
+            <!-- Completed Tasks -->
+            <div class="completed">
+                <h3>Completed Tasks :</h3>
+
+                <div class="task">
+                    <div class="dot"></div>
+                    <div>
+                        <b>Eating breakfast</b><br>
+                        <span>Jan20th - 9:30 am</span>
+                    </div>
+                </div>
+
+                <div class="task">
+                    <div class="dot"></div>
+                    <div>
+                        <b>Complete DSA Problems</b><br>
+                        <span>Jan19th - 8:00 pm</span>
+                    </div>
+                </div>
+
+                <div class="task">
+                    <div class="dot"></div>
+                    <div>
+                        <b>Reading Books</b><br>
+                        <span>Jan15th - 5:30 pm</span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+<title>Planit Landing Page</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body{
+    height:100vh;
+    background:#f5f6fa;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.container{
+    width:1200px;
+    height:600px;
+    background:white;
+    position:relative;
+    overflow:hidden;
+    border-radius:8px;
+}
+
+/* Curved blue shapes */
+.container::before{
+    content:"";
+    position:absolute;
+    width:500px;
+    height:500px;
+    background:#2f3e8f;
+    border-radius:50%;
+    top:-150px;
+    left:-200px;
+}
+
+.container::after{
+    content:"";
+    position:absolute;
+    width:600px;
+    height:600px;
+    background:#2f3e8f;
+    border-radius:50%;
+    bottom:-300px;
+    right:-200px;
+}
+
+/* Navbar */
+.navbar{
+    display:flex;
+    align-items:center;
+    padding:20px 300px;
+    position:relative;
+    z-index:2;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size:30px;
+    font-weight:600;
+}
+
+.logo img{
+    width:40px;
+    height:40px;
+    object-fit: contain;
+}
+
+/* Main Section */
+.content{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:80px;
+    height:80%;
+    position:relative;
+    z-index:2;
+}
+
+/* Cat image */
+.cat img{
+    width:180px;
+    margin-left:40px;
+    object-fit: contain;
+}
+
+/* Text Section */
+.text-section{
+    max-width:400px;
+}
+
+.text-section p{
+    font-size:18px;
+    color:#444;
+    margin-bottom:30px;
+}
+
+/* Button */
+.btn{
+    padding:15px 35px;
+    background:#1c2b6b;
+    border:none;
+    border-radius:30px;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.btn:hover{
+    background:#162255;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    
+    <div class="navbar">
+        <div class="logo">
+            <img src="C:\Users\hansi\OneDrive\Desktop\planit\Plogo.jpeg" alt="logo" class="logo img">
+            Planit
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="cat">
+            <!-- Replace with your cat image -->
+            <img src="Catty.jpeg" alt="cat">
+        </div>
+
+        <div class="text-section">
+            <p>
+                To-Do Master empowers individuals and teams to transform 
+                intentions into measurable outcomes.
+            </p>
+            <button class="btn">Get Started</button>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
