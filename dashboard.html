@@ -6,205 +6,169 @@
 <title>Planit Dashboard</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="dashboard.css">
-
 </head>
 <body>
 
-<div class="container">
+<div class="dashboard-container">
 
     <!-- Navbar -->
-    <div class="navbar">
-        <div class="logo"><img src="C:\Users\hansi\OneDrive\Desktop\planit\Plogo.jpeg" alt="planit logo" class="logo-img">Planit</div>
+    <nav class="navbar">
+        <div class="logo"><span class="logo-text">Planit</span></div>
         <div class="nav-links">
-            <button class="active-btn">Dashboard</button>
-            <button>About</button>
-            <button>Services</button>
-            <button class="profile-btn">Profile ↗</button>
+            <button class="nav-btn active-btn">Dashboard</button>
+            <button class="nav-btn">About</button>
+            <button class="nav-btn">Services</button>
+            <button class="nav-btn profile-btn">Profile ↗</button>
+        </div>
+    </nav>
+
+    <!-- Top Section -->
+    <div class="top-section">
+        <div class="welcome-box">
+            <h2>Hello Francisco</h2>
+            <h1>You got 7 tasks today..!</h1>
+            <button class="add-task-btn">+ Add Task</button>
+        </div>
+
+        <!-- Calendar Notification Bell -->
+        <div class="top-right">
+            <div class="calendar-mini">
+                <span class="calendar-label">Monthly calendar</span>
+                <div class="mini-calendar">
+                    <div class="mini-date">16</div>
+                </div>
+            </div>
+            <div class="notification-bell">🔔</div>
         </div>
     </div>
 
-    <!-- Main Layout -->
-    <div class="main">
-
-        <!-- Left -->
-        <div>
-            <div class="welcome">
-                <h2>Hello ,Hansitha</h2>
-                <h1>You got 7 tasks today..!</h1>
-                <button class="add-btn">+ Add Tasks</button>
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Left Section -->
+        <div class="left-section">
+            <!-- Progress Circle -->
+            <div class="progress-circle">
+                <div class="circle-content">
+                    <span class="percentage">60%</span>
+                </div>
             </div>
 
-            <!-- Progress Graph -->
-            <div class="progress">
-                <span>60%</span>
+            <!-- Upcoming Tasks Slider -->
+            <div class="upcoming-tasks">
+                <h3>Upcoming Tasks</h3>
+                <div class="task-slider">
+                    <button class="slider-btn prev">❮</button>
+                    <div class="task-card">
+                        <div class="task-image">
+                            <img src="C:\Users\hansi\OneDrive\Desktop\planit\bdaycat.jpeg" alt="Task">
+                        </div>
+                    </div>
+                    <button class="slider-btn next">❯</button>
+                </div>
+                <button class="view-all-btn">View all ↗</button>
             </div>
-
-            <!-- Upcoming -->
-        <div class="upcoming">
-    <h3>Upcoming Tasks</h3>
-
-    <div class="slider">
-        <span class="arrow">&#10094;</span>
-
-        <div class="task-card">
-            <img src="C:\Users\hansi\OneDrive\Desktop\planit\bdaycat.jpeg" alt="Birthday Task">
         </div>
 
-        <span class="arrow">&#10095;</span>
+        <!-- Right Section -->
+        <div class="right-section">
+            <!-- Calendar -->
+            <div class="calendar-widget">
+                <h3>Monthly calendar</h3>
+                <div class="calendar-info">
+                    <span id="fullDate"></span>
+                    <span id="liveTime"></span>
+                </div>
+
+                <div class="calendar-header">
+                    <button id="prev">❮</button>
+                    <h4 id="monthYear"></h4>
+                    <button id="next">❯</button>
+                </div>
+
+                <div class="weekdays">
+                    <div>Sun</div><div>Mon</div><div>Tue</div>
+                    <div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+                </div>
+
+                <div id="days" class="days"></div>
+
+                <div class="calendar-legend">
+                    <div><span class="legend-dot completed"></span> Completed</div>
+                    <div><span class="legend-dot upcoming"></span> Upcoming</div>
+                    <div><span class="legend-dot incomplete"></span> Incomplete</div>
+                </div>
+            </div>
+
+            <!-- Completed Tasks -->
+            <div class="completed-tasks">
+                <h3>Completed Tasks</h3>
+                <div class="task-list">
+                    <div class="task-item">
+                        <div class="task-dot"></div>
+                        <div class="task-info">
+                            <b>Eating breakfast</b><br>
+                            <span>Jan 20th - 9:30 am</span>
+                        </div>
+                    </div>
+
+                    <div class="task-item">
+                        <div class="task-dot"></div>
+                        <div class="task-info">
+                            <b>Complete DSA Problems</b><br>
+                            <span>Jan 19th - 8:00 pm</span>
+                        </div>
+                    </div>
+
+                    <div class="task-item">
+                        <div class="task-dot"></div>
+                        <div class="task-info">
+                            <b>Reading Books</b><br>
+                            <span>Jan 15th - 5:30 pm</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <button class="view-btn">View all ↗</button>
-</div>
+    <!-- About Section -->
+    <div class="about-section">
+        <h3>About:</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor
+            sit amet, consectetur adipiscing elit. ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur.</p>
+    </div>
 
+    <!-- Team Section -->
+    <div class="team-section">
+        <h3>Our Team</h3>
+        <div class="team-members">
+            <div class="team-member"></div>
+            <div class="team-member"></div>
+            <div class="team-member"></div>
+            <div class="team-member"></div>
         </div>
-        <!-- Right -->
-        <div>
-          
-<style>
-body{
-  font-family: Arial, sans-serif;
-  background:#f3f4f6;
-  display:flex;
-  justify-content:center;
-  margin-top:40px;
-}
+    </div>
 
-.calendar-wrapper{
-  width:360px;
-  background:#ffffff;
-  padding:20px;
-  border-radius:25px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.1);
-  text-align:center;
-}
-
-.title{
-  margin:0;
-  font-size:22px;
-}
-
-.top-info{
-  display:flex;
-  justify-content:space-between;
-  font-size:14px;
-  color:#555;
-  margin:8px 0 15px 0;
-}
-
-.header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:10px;
-}
-
-.header button{
-  background:#e5e7eb;
-  border:none;
-  padding:5px 10px;
-  border-radius:8px;
-  cursor:pointer;
-}
-
-.header button:hover{
-  background:#d1d5db;
-}
-
-.weekdays, .days{
-  display:grid;
-  grid-template-columns:repeat(7,1fr);
-  gap:6px;
-}
-
-.weekdays div{
-  font-weight:bold;
-  font-size:13px;
-  color:#888;
-}
-
-.days div{
-  padding:10px;
-  border-radius:10px;
-  cursor:pointer;
-  background:#f3f4f6;
-}
-
-.days div:hover{
-  transform:scale(1.05);
-}
-
-/* Status Colors */
-.completedays{
-  background:#22c55e;
-  color:white;
-}
-
-.incompletedays{
-  background:black;
-  color:white;
-}
-
-.upcomingdays{
-  background:#facc15;
-  color:black;
-}
-
-.today{
-  border:2px solid #3b82f6;
-}
-
-.legend{
-  margin-top:15px;
-  font-size:13px;
-  text-align:left;
-}
-
-.legend div{
-  margin:4px 0;
-}
-
-.dot{
-  height:10px;
-  width:10px;
-  display:inline-block;
-  border-radius:50%;
-  margin-right:6px;
-}
-
-.dot.completed{ background:#22c55e; }
-.dot.upcoming{ background:#facc15; }
-.dot.incomplete{ background:black; }
-</style>
-<div class="calendar-wrapper">
-
-  <h2 class="title">Monthly calendar</h2>
-  <div class="top-info">
-    <span id="fullDate"></span>
-    <span id="liveTime"></span>
-  </div>
-
-  <div class="header">
-    <button id="prev">❮</button>
-    <h3 id="monthYear"></h3>
-    <button id="next">❯</button>
-  </div>
-
-  <div class="weekdays">
-    <div>Sun</div><div>Mon</div><div>Tue</div>
-    <div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
-  </div>
-
-  <div id="days" class="days"></div>
-
-  <div class="legend">
-    <div><span class="dot completed"></span> Tasks Completed</div>
-    <div><span class="dot upcoming"></span> Upcoming Tasks</div>
-    <div><span class="dot incomplete"></span> Incomplete Tasks</div>
-  </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Planit</h4>
+                <p>© 2024, Planit - All rights reserved</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <p>Contact Us</p>
+            </div>
+        </div>
+    </footer>
 
 </div>
-
 <script>
+// Calendar functionality
 const monthYear = document.getElementById("monthYear");
 const daysContainer = document.getElementById("days");
 const fullDate = document.getElementById("fullDate");
@@ -212,103 +176,77 @@ const liveTime = document.getElementById("liveTime");
 
 let date = new Date();
 
-/* Example Task Status Data */
+// Task status data
 const completedDays = [1,2,8,9,15,19,20,27,29];
 const incompleteDays = [12,23];
 const upcomingDays = [31];
 
 function renderCalendar(){
-  const year = date.getFullYear();
-  const month = date.getMonth();
+    const year = date.getFullYear();
+    const month = date.getMonth();
 
-  const firstDay = new Date(year, month, 1).getDay();
-  const lastDate = new Date(year, month + 1, 0).getDate();
+    const firstDay = new Date(year, month, 1).getDay();
+    const lastDate = new Date(year, month + 1, 0).getDate();
 
-  const months = [
-    "January","February","March","April","May","June",
-    "July","August","September","October","November","December"
-  ];
+    const months = [
+        "January","February","March","April","May","June",
+        "July","August","September","October","November","December"
+    ];
 
-  monthYear.innerText = months[month] + " " + year;
-  daysContainer.innerHTML = "";
+    monthYear.innerText = months[month] + " " + year;
+    daysContainer.innerHTML = "";
 
-  for(let i=0;i<firstDay;i++){
-    daysContainer.innerHTML += "<div></div>";
-  }
-
-  for(let day=1; day<=lastDate; day++){
-    let className = "";
-
-    if(completedDays.includes(day)) className="completedays";
-    if(incompleteDays.includes(day)) className="incompletedays";
-    if(upcomingDays.includes(day)) className="upcomingdays";
-
-    const now = new Date();
-    if(day===now.getDate() && month===now.getMonth() && year===now.getFullYear()){
-      className += " today";
+    for(let i=0;i<firstDay;i++){
+        daysContainer.innerHTML += "<div></div>";
     }
 
-    daysContainer.innerHTML += `<div class="${className}">${day}</div>`;
-  }
+    for(let day=1; day<=lastDate; day++){
+        let className = "";
+
+        if(completedDays.includes(day)) className="completedays";
+        if(incompleteDays.includes(day)) className="incompletedays";
+        if(upcomingDays.includes(day)) className="upcomingdays";
+
+        const now = new Date();
+        if(day===now.getDate() && month===now.getMonth() && year===now.getFullYear()){
+            className += " today";
+        }
+
+        daysContainer.innerHTML += `<div class="${className}">${day}</div>`;
+    }
 }
 
 document.getElementById("prev").onclick = ()=>{
-  date.setMonth(date.getMonth()-1);
-  renderCalendar();
+    date.setMonth(date.getMonth()-1);
+    renderCalendar();
 };
 
 document.getElementById("next").onclick = ()=>{
-  date.setMonth(date.getMonth()+1);
-  renderCalendar();
+    date.setMonth(date.getMonth()+1);
+    renderCalendar();
 };
 
-/* Live Date & Time */
 function updateDateTime(){
-  const now = new Date();
-  fullDate.innerText = now.toDateString();
-  liveTime.innerText = now.toLocaleTimeString();
+    const now = new Date();
+    fullDate.innerText = now.toDateString();
+    liveTime.innerText = now.toLocaleTimeString();
 }
 setInterval(updateDateTime,1000);
 
 updateDateTime();
 renderCalendar();
+
+// Slider functionality
+document.querySelector('.slider-btn.prev').addEventListener('click', function() {
+    const slider = document.querySelector('.task-slider');
+    slider.style.transform = 'translateX(-50px)';
+});
+
+document.querySelector('.slider-btn.next').addEventListener('click', function() {
+    const slider = document.querySelector('.task-slider');
+    slider.style.transform = 'translateX(50px)';
+});
 </script>
-</div>
-            <!-- Completed Tasks -->
-            <div class="completed">
-                <h3>Completed Tasks :</h3>
-
-                <div class="task">
-                    <div class="dot"></div>
-                    <div>
-                        <b>Eating breakfast</b><br>
-                        <span>Jan20th - 9:30 am</span>
-                    </div>
-                </div>
-
-                <div class="task">
-                    <div class="dot"></div>
-                    <div>
-                        <b>Complete DSA Problems</b><br>
-                        <span>Jan19th - 8:00 pm</span>
-                    </div>
-                </div>
-
-                <div class="task">
-                    <div class="dot"></div>
-                    <div>
-                        <b>Reading Books</b><br>
-                        <span>Jan15th - 5:30 pm</span>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
 
 </body>
 </html>
