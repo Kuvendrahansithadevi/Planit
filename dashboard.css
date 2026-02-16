@@ -1,218 +1,566 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
-body{
-    background:#e9e9e9;
-    padding:30px;
+body {
+    background: #f5f5f5;
 }
 
-.container{
-    background:#f6f6f6;
-    border-radius:20px;
-    padding:30px;
+.dashboard-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-/* ===== Navbar ===== */
-
-.navbar{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:40px;
+/* ===== NAVBAR ===== */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+    background: white;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
-.logo{
+.logo-text {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1f2742;
+}
+
+.nav-links {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.nav-btn {
+    padding: 8px 16px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 20px;
+    transition: all 0.3s;
+}
+
+.nav-btn.active-btn {
+    background: #1f2742;
+    color: white;
+}
+
+.nav-btn.profile-btn {
+    border: 1px solid #1f2742;
+    color: #1f2742;
+}
+
+/* ===== TOP SECTION ===== */
+.top-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.welcome-box {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    flex: 1;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.welcome-box h2 {
+    color: #888;
+    font-weight: 500;
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.welcome-box h1 {
+    color: #1f2742;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.add-task-btn {
+    background: #1f2742;
+    color: white;
+    padding: 10px 24px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+}
+
+.add-task-btn:hover {
+    background: #16203a;
+}
+
+.top-right {
     display: flex;
     align-items: center;
-    gap: 8px;
-    font-size:30px;
-    font-weight:600;
+    gap: 20px;
 }
 
-.logo-img{
-    width: 40px;
-    height: 35px;
-    
+.calendar-mini {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    min-width: 150px;
 }
 
-.nav-links{
-    display:flex;
-    gap:20px;
-    align-items:center;
+.calendar-label {
+    display: block;
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 10px;
 }
 
-.nav-links button{
-    padding:8px 18px;
-    border-radius:20px;
-    border:none;
-    cursor:pointer;
+.mini-calendar {
+    background: #f0f0f0;
+    padding: 15px;
+    border-radius: 10px;
 }
 
-.active-btn{
-    background:#1f2742;
-    color:white;
+.mini-date {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1f2742;
 }
 
-.profile-btn{
-    border:1px solid #1f2742;
-    background:transparent;
+.notification-bell {
+    font-size: 28px;
+    cursor: pointer;
 }
 
-/* ===== Layout ===== */
-
-.main{
-    display:grid;
-    grid-template-columns:2fr 1fr;
-    gap:40px;
+/* ===== MAIN CONTENT ===== */
+.main-content {
+    display: grid;
+    grid-template-columns: 2fr 1.2fr;
+    gap: 30px;
+    margin-bottom: 40px;
 }
 
-/* ===== Left Section ===== */
-
-.welcome h2{
-    font-weight:500;
-    color:#777;
+/* ===== LEFT SECTION ===== */
+.left-section {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
 
-.welcome h1{
-    margin:10px 0;
+/* Progress Circle */
+.progress-circle {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
-.add-btn{
-    background:#1f2742;
-    color:white;
-    padding:10px 20px;
-    border-radius:25px;
-    border:none;
-    cursor:pointer;
-    margin-top:15px;
+.circle-content {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: conic-gradient(#1f2742 0% 60%, #e0e0e0 60% 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 }
 
-/* Circle Graph */
-
-.progress{
-    width:220px;
-    height:220px;
-    border-radius:50%;
-    background:conic-gradient(#1f2742 0% 60%, #d3d3d3 60% 100%);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    margin-top:40px;
+.circle-content::after {
+    content: '';
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    background: white;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
 }
 
-.progress span{
-    background:#f6f6f6;
-    width:150px;
-    height:150px;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:24px;
-    font-weight:600;
+.percentage {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1f2742;
+    position: relative;
+    z-index: 1;
 }
 
-/* Upcoming Card */
-
-.upcoming{
-    margin-top:40px;
+/* Upcoming Tasks */
+.upcoming-tasks {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
-.upcoming h3{
-    margin-bottom:20px;
+.upcoming-tasks h3 {
+    margin-bottom: 20px;
+    font-size: 18px;
+    color: #1f2742;
 }
 
-.slider{
-    display:flex;
-    align-items:center;
-    gap:20px;
+.task-slider {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 20px;
+    overflow: hidden;
 }
 
-.arrow{
-    font-size:24px;
-    cursor:pointer;
-    color:#333;
+.slider-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #1f2742;
+    padding: 8px 12px;
+    border-radius: 50%;
+    transition: all 0.3s;
 }
 
-.task-card{
-    width:220px;
-    height:250px;
-    border-radius:12px;
-    overflow:hidden;
+.slider-btn:hover {
+    background: #f0f0f0;
+}
+
+.task-card {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 250px;
+}
+
+.task-image {
+    width: 220px;
+    height: 250px;
+    border-radius: 12px;
+    overflow: hidden;
     box-shadow: 8px 8px 0px #d3d3d3;
 }
 
-.task-card img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
+.task-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-.view-btn{
-    margin-top:15px;
-    padding:6px 16px;
-    border-radius:20px;
-    border:1px solid #aaa;
-    background:transparent;
-    cursor:pointer;
-    font-size:12px;
+.view-all-btn {
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+    background: transparent;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 13px;
+    color: #1f2742;
+    transition: all 0.3s;
 }
 
-
-/* ===== Right Section ===== */
-
-.calendar{
-    background:white;
-    padding:20px;
-    border-radius:20px;
+.view-all-btn:hover {
+    background: #f0f0f0;
 }
 
-.calendar h3{
-    margin-bottom:15px;
+/* ===== RIGHT SECTION ===== */
+.right-section {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
 
-.days{
-    display:grid;
-    grid-template-columns:repeat(7,1fr);
-    gap:8px;
+/* Calendar Widget */
+.calendar-widget {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
-.day{
-    padding:8px;
-    text-align:center;
-    border-radius:8px;
-    background:#f0f0f0;
-    font-size:13px;
+.calendar-widget h3 {
+    font-size: 16px;
+    margin-bottom: 15px;
+    color: #1f2742;
 }
 
-.day.active{
-    background:#1f2742;
-    color:white;
+.calendar-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 15px;
 }
 
-.completed{
-    margin-top:30px;
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
 }
 
-.task{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    margin:15px 0;
+.calendar-header button {
+    background: #f0f0f0;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
 }
 
-.dot{
-    width:10px;
-    height:10px;
-    background:gold;
-    border-radius:50%;
+.calendar-header button:hover {
+    background: #e0e0e0;
 }
 
-.task span{
-    font-size:13px;
-    color:#555;
+.calendar-header h4 {
+    font-size: 14px;
+    color: #1f2742;
+}
+
+.weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    margin-bottom: 8px;
+}
+
+.weekdays div {
+    text-align: center;
+    font-weight: 600;
+    font-size: 11px;
+    color: #888;
+    padding: 5px;
+}
+
+.days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    margin-bottom: 15px;
+}
+
+.days div {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f3f4f6;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: all 0.3s;
+}
+
+.days div:hover {
+    transform: scale(1.05);
+}
+
+.completedays {
+    background: #22c55e !important;
+    color: white;
+}
+
+.incompletedays {
+    background: #000 !important;
+    color: white;
+}
+
+.upcomingdays {
+    background: #facc15 !important;
+    color: #000;
+}
+
+.today {
+    border: 2px solid #3b82f6;
+}
+
+.calendar-legend {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 11px;
+    text-align: left;
+}
+
+.calendar-legend div {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.legend-dot.completed {
+    background: #22c55e;
+}
+
+.legend-dot.upcoming {
+    background: #facc15;
+}
+
+.legend-dot.incomplete {
+    background: #000;
+}
+
+/* Completed Tasks */
+.completed-tasks {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.completed-tasks h3 {
+    font-size: 16px;
+    margin-bottom: 15px;
+    color: #1f2742;
+}
+
+.task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.task-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.task-dot {
+    width: 10px;
+    height: 10px;
+    background: #facc15;
+    border-radius: 50%;
+    margin-top: 4px;
+    flex-shrink: 0;
+}
+
+.task-info {
+    flex: 1;
+}
+
+.task-info b {
+    display: block;
+    color: #1f2742;
+    font-size: 13px;
+    margin-bottom: 3px;
+}
+
+.task-info span {
+    font-size: 11px;
+    color: #888;
+}
+
+/* ===== ABOUT SECTION ===== */
+.about-section {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    margin-bottom: 40px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.about-section h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #1f2742;
+}
+
+.about-section p {
+    color: #555;
+    font-size: 14px;
+    line-height: 1.6;
+    text-align: justify;
+}
+
+/* ===== TEAM SECTION ===== */
+.team-section {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    margin-bottom: 40px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.team-section h3 {
+    font-size: 20px;
+    margin-bottom: 30px;
+    color: #1f2742;
+    text-align: center;
+}
+
+.team-members {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+}
+
+.team-member {
+    aspect-ratio: 1;
+    background: #f0f0f0;
+    border-radius: 15px;
+    border: 2px dashed #ddd;
+}
+
+@media (max-width: 768px) {
+    .team-members {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .main-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== FOOTER ===== */
+.footer {
+    background: #1f2742;
+    color: white;
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.footer-section h4 {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.footer-section p {
+    font-size: 13px;
+    color: #ccc;
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+    }
 }
