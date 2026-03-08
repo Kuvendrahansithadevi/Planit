@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Planit Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+
+<div class="dashboard-container">
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="Plogo.png" alt="logo" class="logo-img">
+            <span class="logo-text">Planit</span></div>
+        <div class="nav-links">
+            <button class="nav-btn active-btn">Dashboard</button>
+            <button class="nav-btn">About</button>
+            <button class="nav-btn">Services</button>
+            <button class="nav-btn profile-btn">Profile ↗</button>
+        </div>
+    </nav>
+
+    <!-- Top Section -->
+    <div class="top-section">
+        <div class="welcome-box">
+            <h2>Hello User</h2>
+            <h1>You got 7 tasks today..!</h1>
+            <button class="add-task-btn" onclick="window.location.href='AddTask.html'">+ Add Task</button>
+        </div>
+
+        <!-- Calendar Notification Bell -->
+        <div class="top-right">
+            <div class="calendar-mini">
+                <span class="calendar-label">Monthly calendar</span>
+                <div class="mini-calendar">
+                    <div class="mini-date">23</div>
+                </div>
+            </div>
+            <div class="notification-bell">🔔</div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Left Section -->
+        <div class="left-section">
+            <!-- Progress Circle -->
+            <div class="progress-circle">
+                <div class="circle-content">
+                    <span class="percentage">60%</span>
+                </div>
+            </div>
+             <!-- Today's Tasks (NEW) -->
+                <!-- Today's Tasks -->
+<div class="today-tasks">
+    <h3>Today's Tasks</h3>
+
+    <div class="task-list">
+        <div class="task-item">
+            <div class="task-dot"></div>
+            <div class="task-info">
+                <b>Attend Meeting</b>
+                <span>10:00 AM</span>
+            </div>
+        </div>
+
+        <div class="task-item">
+            <div class="task-dot"></div>
+            <div class="task-info">
+                <b>Work on Project</b>
+                <span>2:00 PM</span>
+            </div>
+        </div>
+
+        <div class="task-item">
+            <div class="task-dot"></div>
+            <div class="task-info">
+                <b>Go for Exercise</b>
+                <span>6:30 PM</span>
+            </div>
+        </div>
+</div>
+             
+            </div>
+            <!-- Completed Tasks -->
+            <div class="completed-tasks">
+                <h3>Completed Tasks</h3>
+                <div class="task-list">
+                    <div class="task-item">
+                        <div class="task-dot"></div>
+                        <div class="task-info">
+                            <b>Eating breakfast</b>
+                            <span>Feb 20th - 9:30 am</span>
+                        </div>
+                    </div>
+
+                    <div class="task-item">
+                        <div class="task-dot"></div>
+                        <div class="task-info">
+                            <b>Complete DSA Problems</b>
+                            <span>Feb 19th - 8:00 pm</span>
+                        </div>
+                    </div>
+
+                    <div class="task-item">
+                        <div class="task-dot"></div>
+                        <div class="task-info">
+                            <b>Reading Books</b>
+                            <span>Feb 15th - 5:30 pm</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- Right Section -->
+        <div class="right-section">
+            <!-- Calendar -->
+
+            <img style="width: 150px; position: relative; top: 5%; left: 15%;" src="https://ik.imagekit.io/nvl5pyu8u/Screenshot_2026-02-28_213946-removebg-preview.png" alt="Error Image" class="error-image">
+            <div class="calendar-widget">
+                <h3>Monthly calendar</h3>
+                <div class="calendar-info">
+                    <span id="fullDate">jan 30th</span>
+                    <span id="liveTime"></span>
+                </div>
+
+                <div class="calendar-header">
+                    <button id="prev">❮</button>
+                    <h4 id="monthYear"></h4>
+                    <button id="next">❯</button>
+                </div>
+
+                <div class="weekdays">
+                    <div>Sun</div><div>Mon</div><div>Tue</div>
+                    <div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+                </div>
+
+                <div id="days" class="days"></div>
+
+                <div class="calendar-legend">
+                    <div class="legend-item"><div class="dot" style="background:#43a886;"></div> Tasks Completed</div>
+                    <div class="legend-item"><div class="dot" style="background:#FFD700;"></div> Upcoming tasks</div>
+                    <div class="legend-item"><div class="dot" style="background:#000;"></div> Incomplete Tasks</div>
+                </div>
+            </div>
+            <!-- Upcoming Tasks Slider -->
+            <div class="upcoming-tasks">
+                <h3>Upcoming Tasks</h3>
+                <div class="task-slider">
+                    <button class="slider-btn prev">❮</button>
+                    <div class="task-card">
+                        <div class="task-image">
+                            <img src="C:\Users\hansi\OneDrive\Desktop\planit\public\bdaycat.jpeg" alt="Task">
+                        </div>
+                    </div>
+                    <button class="slider-btn next">❯</button>
+                </div>
+                <button class="view-all-btn">View all ↗</button>
+            </div>
+           
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <div class="about-section">
+        <h3>About:</h3>
+        <p><p>
+Planit is a modern and user-friendly To-Do List web application designed to help users organize, manage, and track their daily tasks efficiently. It provides features like task creation, reminders, progress tracking, and a visual dashboard to monitor productivity. The system allows users to mark tasks as completed, view upcoming schedules, and analyze performance through progress indicators and calendar tracking. Planit aims to improve time management, reduce stress, and increase overall productivity by offering a simple yet powerful task management experience.
+</p></p>
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Planit</h4>
+                <p>© 2024, Planit - All rights reserved</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <p>Contact Us</p>
+            </div>
+        </div>
+    </footer>
+
+</div>
+<script>
+// Calendar functionality
+const monthYear = document.getElementById("monthYear");
+const daysContainer = document.getElementById("days");
+const fullDate = document.getElementById("fullDate");
+const liveTime = document.getElementById("liveTime");
+
+let date = new Date();
+
+// Task status data
+const completedDays = [1,2,8,9,15,19,20,27,29];
+const incompleteDays = [12,23];
+const upcomingDays = [31];
+
+function renderCalendar(){
+    const year = date.getFullYear();
+    const month = date.getMonth();
+
+    const firstDay = new Date(year, month, 1).getDay();
+    const lastDate = new Date(year, month + 1, 0).getDate();
+
+    const months = [
+        "January","February","March","April","May","June",
+        "July","August","September","October","November","December"
+    ];
+
+    monthYear.innerText = months[month] + " " + year;
+    daysContainer.innerHTML = "";
+
+    for(let i=0;i<firstDay;i++){
+        daysContainer.innerHTML += "<div></div>";
+    }
+
+    for(let day=1; day<=lastDate; day++){
+        let className = "";
+
+        if(completedDays.includes(day)) className="completed";
+        if(incompleteDays.includes(day)) className="incomplete";
+        if(upcomingDays.includes(day)) className="upcoming";
+
+        const now = new Date();
+        if(day===now.getDate() && month===now.getMonth() && year===now.getFullYear()){
+            className += " today";
+        }
+
+        daysContainer.innerHTML += `<div class="day ${className}">${day}</div>`;
+    }
+}
+
+document.getElementById("prev").onclick = ()=>{
+    date.setMonth(date.getMonth()-1);
+    renderCalendar();
+};
+
+document.getElementById("next").onclick = ()=>{
+    date.setMonth(date.getMonth()+1);
+    renderCalendar();
+};
+
+function updateDateTime(){
+    const now = new Date();
+    fullDate.innerText = now.toDateString();
+    liveTime.innerText = now.toLocaleTimeString();
+}
+setInterval(updateDateTime,1000);
+
+updateDateTime();
+renderCalendar();
+
+// Slider functionality
+document.querySelector('.slider-btn.prev').addEventListener('click', function() {
+    const slider = document.querySelector('.task-slider');
+    slider.style.transform = 'translateX(-50px)';
+});
+
+document.querySelector('.slider-btn.next').addEventListener('click', function() {
+    const slider = document.querySelector('.task-slider');
+    slider.style.transform = 'translateX(50px)';
+});
+</script>
+
+</body>
+</html>

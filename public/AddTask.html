@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planit - Add Task</title>
+    <style>
+        /* 1. BASE STYLES */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: #f0f2f5; overflow: hidden; }
+
+        /* 2. DASHBOARD BACKGROUND (Blurred) */
+        .dashboard-wrapper {
+            width: 100%; height: 100vh; padding: 20px;
+            display: flex; flex-direction: column; gap: 20px;
+            filter: blur(8px); pointer-events: none;
+        }
+        .navbar { background: white; padding: 15px 40px; border-radius: 50px; display: flex; justify-content: space-between; align-items: center; }
+        .main-content { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+        .card { background: white; border-radius: 20px; padding: 30px; min-height: 200px; }
+
+        /* 3. MODAL OVERLAY */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex; justify-content: center; align-items: center;
+            z-index: 999;
+        }
+
+        /* 4. LAYOUT CONTAINER (Character on Left, Card Centered) */
+        .layout-container {
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+            align-items: flex-end; /* Align character feet with button level */
+            justify-content: center;
+        }
+
+        /* 5. CHARACTER (Placed on Left) */
+        .character-container {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end; /* Push toward the middle card */
+        }
+
+        .character-img {
+            width: 180px; 
+            height: auto;
+            margin-right: -20px; /* Slight overlap for better integration */
+            /* No transform/scaleX used to ensure no mirror effect */
+        }
+
+        /* 6. TASK WINDOW (Middle) */
+        .task-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+        }
+
+        .task-modal {
+            background-color: #1e2640;
+            width: 400px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .modal-header { padding: 15px; color: white; font-size: 22px; }
+
+        .task-textarea {
+            width: 100%; height: 220px;
+            background: transparent; border: none;
+            padding: 20px; color: white; font-size: 18px;
+            outline: none; resize: none;
+        }
+
+        .modal-footer {
+            background: white; padding: 15px;
+            display: flex; justify-content: center; gap: 8px;
+        }
+
+        .pill {
+            background-color: #437d6d; color: white;
+            padding: 8px 12px; border-radius: 6px;
+            font-weight: bold; font-size: 14px;
+        }
+
+        .add-note-btn {
+            margin-top: 25px;
+            background-color: #e0e0e0; border: 1px solid #444;
+            padding: 12px 60px; border-radius: 30px;
+            font-size: 16px; font-weight: 500; cursor: pointer;
+        }
+
+        /* Right Spacer to keep task window centered */
+        .spacer { flex: 1; }
+    </style>
+</head>
+<body>
+
+    <div class="dashboard-wrapper">
+        <div class="navbar"><h2>Planit</h2></div>
+        <div class="main-content">
+            <div class="card"><h1>You got 7 tasks today..!</h1></div>
+            <div class="card"><h3>Monthly Calendar</h3></div>
+        </div>
+    </div>
+
+    <div class="modal-overlay">
+        <div class="layout-container">
+            
+            <div class="character-container">
+                <img src="https://ik.imagekit.io/dgnsi17es/plan.jpeg?updatedAt=1772439737410" alt="Character" class="character-img">
+            </div>
+
+            <div class="task-stack">
+                <div class="task-modal">
+                    <div class="modal-header">↖</div>
+                    <textarea class="task-textarea" placeholder="Type task....."></textarea>
+                    <div class="modal-footer">
+                        <div class="pill">9:30 AM</div>
+                        <div class="pill">31</div>
+                        <div class="pill">01</div>
+                        <div class="pill" style="background-color: #556b67;">2026</div>
+                    </div>
+                </div>
+                <button class="add-note-btn">Add note</button>
+            </div>
+
+            <div class="spacer"></div>
+
+        </div>
+    </div>
+
+</body>
+</html>
