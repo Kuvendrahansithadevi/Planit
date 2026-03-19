@@ -28,73 +28,50 @@
             z-index: 999;
         }
 
-        /* 4. LAYOUT CONTAINER (Character on Left, Card Centered) */
+        /* 4. LAYOUT CONTAINER */
         .layout-container {
-            display: flex;
-            width: 100%;
-            max-width: 1200px;
-            align-items: flex-end; /* Align character feet with button level */
-            justify-content: center;
+            display: flex; width: 100%; max-width: 1200px;
+            align-items: flex-end; justify-content: center;
         }
 
-        /* 5. CHARACTER (Placed on Left) */
-        .character-container {
-            flex: 1;
-            display: flex;
-            justify-content: flex-end; /* Push toward the middle card */
-        }
+        /* 5. CHARACTER */
+        .character-container { flex: 1; display: flex; justify-content: flex-end; }
+        .character-img { width: 180px; height: auto; margin-right: -20px; }
 
-        .character-img {
-            width: 180px; 
-            height: auto;
-            margin-right: -20px; /* Slight overlap for better integration */
-            /* No transform/scaleX used to ensure no mirror effect */
-        }
-
-        /* 6. TASK WINDOW (Middle) */
-        .task-stack {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            flex: 1;
-        }
-
+        /* 6. TASK WINDOW */
+        .task-stack { display: flex; flex-direction: column; align-items: center; flex: 1; }
         .task-modal {
-            background-color: #1e2640;
-            width: 400px;
-            border-radius: 20px;
-            overflow: hidden;
+            background-color: #1e2640; width: 400px;
+            border-radius: 20px; overflow: hidden;
             box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
-
-        .modal-header { padding: 15px; color: white; font-size: 22px; }
+        .modal-header { padding: 15px; color: white; font-size: 22px; cursor: pointer; }
 
         .task-textarea {
-            width: 100%; height: 220px;
-            background: transparent; border: none;
-            padding: 20px; color: white; font-size: 18px;
-            outline: none; resize: none;
+            width: 100%; height: 220px; background: transparent; border: none;
+            padding: 20px; color: white; font-size: 18px; outline: none; resize: none;
         }
 
+        /* 7. PILLS & INPUTS */
         .modal-footer {
             background: white; padding: 15px;
             display: flex; justify-content: center; gap: 8px;
         }
-
-        .pill {
+        .pill-input {
             background-color: #437d6d; color: white;
-            padding: 8px 12px; border-radius: 6px;
-            font-weight: bold; font-size: 14px;
+            border: none; border-radius: 6px;
+            padding: 5px 10px; font-weight: bold; font-size: 14px;
+            outline: none; cursor: pointer;
         }
+        .pill-input::-webkit-calendar-picker-indicator { filter: invert(1); } /* Dark mode indicator */
 
         .add-note-btn {
-            margin-top: 25px;
-            background-color: #e0e0e0; border: 1px solid #444;
+            margin-top: 25px; background-color: #e0e0e0; border: 1px solid #444;
             padding: 12px 60px; border-radius: 30px;
-            font-size: 16px; font-weight: 500; cursor: pointer;
+            font-size: 16px; font-weight: 500; cursor: pointer; transition: 0.3s;
         }
+        .add-note-btn:hover { background-color: #d0d0d0; }
 
-        /* Right Spacer to keep task window centered */
         .spacer { flex: 1; }
     </style>
 </head>
@@ -110,29 +87,75 @@
 
     <div class="modal-overlay">
         <div class="layout-container">
-            
             <div class="character-container">
                 <img src="https://ik.imagekit.io/dgnsi17es/plan.jpeg?updatedAt=1772439737410" alt="Character" class="character-img">
             </div>
 
             <div class="task-stack">
                 <div class="task-modal">
-                    <div class="modal-header">↖</div>
-                    <textarea class="task-textarea" placeholder="Type task....."></textarea>
+                    <div class="modal-header" onclick="window.location.href='dashboard.html'">↖</div>
+                    <textarea id="taskTitle" class="task-textarea" placeholder="Type task....."></textarea>
+                    
                     <div class="modal-footer">
-                        <div class="pill">9:30 AM</div>
-                        <div class="pill">31</div>
-                        <div class="pill">01</div>
-                        <div class="pill" style="background-color: #556b67;">2026</div>
+                        <input type="time" id="taskTime" class="pill-input" value="09:30">
+                        <input type="date" id="taskDate" class="pill-input">
                     </div>
                 </div>
-                <button class="add-note-btn">Add note</button>
+                <button class="add-note-btn" onclick="submitTask()">Add note</button>
             </div>
 
             <div class="spacer"></div>
-
         </div>
     </div>
 
+    <script>
+        // Default గా ఈరోజు డేట్ సెట్ చేయడం
+        document.getElementById('taskDate').valueAsDate = new Date();
+
+        async function submitTask() {
+            const userId = localStorage.getItem('userId');
+            const title = document.getElementById('taskTitle').value;
+            const time = document.getElementById('taskTime').value;
+            const date = document.getElementById('taskDate').value;
+
+            if (!title) {
+                alert("Please type a task!");
+                return;
+            }
+
+            if (!userId) {
+                alert("User session not found. Please login again.");
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // డేట్ మరియు టైమ్‌ని కలపడం
+            const dueDate = new Date(`${date}T${time}`);
+
+            try {
+                const response = await fetch('/api/tasks/add', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        userId: userId,
+                        title: title,
+                        dueDate: dueDate,
+                        priority: 'medium' // Default priority
+                    })
+                });
+
+                if (response.ok) {
+                    alert("Task added successfully!");
+                    window.location.href = 'dashboard.html';
+                } else {
+                    const errorData = await response.json();
+                    alert("Error: " + errorData.error);
+                }
+            } catch (error) {
+                console.error("Submission failed:", error);
+                alert("Something went wrong!");
+            }
+        }
+    </script>
 </body>
 </html>

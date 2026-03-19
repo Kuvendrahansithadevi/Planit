@@ -20,15 +20,15 @@
             <button class="nav-btn active-btn">Dashboard</button>
             <button class="nav-btn">About</button>
             <button class="nav-btn">Services</button>
-            <button class="nav-btn profile-btn">Profile ↗</button>
+            <button class="nav-btn profile-btn" onclick="window.location.href='profile.html'">Profile ↗</button>
         </div>
     </nav>
 
     <!-- Top Section -->
     <div class="top-section">
         <div class="welcome-box">
-            <h2>Hello User</h2>
-            <h1>You got 7 tasks today..!</h1>
+            <h2 id="userNameDisplay">Hello User</h2>
+            <h1 id="taskSummary">You got 0 tasks today..!</h1>
             <button class="add-task-btn" onclick="window.location.href='AddTask.html'">+ Add Task</button>
         </div>
 
@@ -37,7 +37,7 @@
             <div class="calendar-mini">
                 <span class="calendar-label">Monthly calendar</span>
                 <div class="mini-calendar">
-                    <div class="mini-date">23</div>
+                    <div class="mini-date" id="miniDay">0</div>
                 </div>
             </div>
             <div class="notification-bell">🔔</div>
@@ -51,7 +51,7 @@
             <!-- Progress Circle -->
             <div class="progress-circle">
                 <div class="circle-content">
-                    <span class="percentage">60%</span>
+                    <span class="percentage" id="progressPercent">0%</span>
                 </div>
             </div>
              <!-- Today's Tasks (NEW) -->
@@ -59,28 +59,12 @@
 <div class="today-tasks">
     <h3>Today's Tasks</h3>
 
-    <div class="task-list">
+    <div class="task-list" id="pendingTasksList">
         <div class="task-item">
             <div class="task-dot"></div>
             <div class="task-info">
-                <b>Attend Meeting</b>
-                <span>10:00 AM</span>
-            </div>
-        </div>
-
-        <div class="task-item">
-            <div class="task-dot"></div>
-            <div class="task-info">
-                <b>Work on Project</b>
-                <span>2:00 PM</span>
-            </div>
-        </div>
-
-        <div class="task-item">
-            <div class="task-dot"></div>
-            <div class="task-info">
-                <b>Go for Exercise</b>
-                <span>6:30 PM</span>
+                <b>Loading...</b>
+                <span>--:--</span>
             </div>
         </div>
 </div>
@@ -89,28 +73,12 @@
             <!-- Completed Tasks -->
             <div class="completed-tasks">
                 <h3>Completed Tasks</h3>
-                <div class="task-list">
+                <div class="task-list" id="completedTasksList">
                     <div class="task-item">
                         <div class="task-dot"></div>
                         <div class="task-info">
-                            <b>Eating breakfast</b>
-                            <span>Feb 20th - 9:30 am</span>
-                        </div>
-                    </div>
-
-                    <div class="task-item">
-                        <div class="task-dot"></div>
-                        <div class="task-info">
-                            <b>Complete DSA Problems</b>
-                            <span>Feb 19th - 8:00 pm</span>
-                        </div>
-                    </div>
-
-                    <div class="task-item">
-                        <div class="task-dot"></div>
-                        <div class="task-info">
-                            <b>Reading Books</b>
-                            <span>Feb 15th - 5:30 pm</span>
+                            <b>No completed tasks yet</b>
+                            <span>--:--</span>
                         </div>
                     </div>
                 </div>
@@ -154,11 +122,19 @@
                 <h3>Upcoming Tasks</h3>
                 <div class="task-slider">
                     <button class="slider-btn prev">❮</button>
-                    <div class="task-card">
-                        <div class="task-image">
-                            <img src="C:\Users\hansi\OneDrive\Desktop\planit\public\bdaycat.jpeg" alt="Task">
-                        </div>
+        
+                    <div class="slider-wrapper" id="sliderWrapper">
+                         <div class="task-card">
+                             <div class="task-image"><img src="bdaycat.jpeg" alt="Task"></div>
+                         </div>
+                         <div class="task-card">
+                             <div class="task-image"><img src="semcat.jpeg" alt="Task 2"></div>
+                         </div>
+                         <div class="task-card">
+                             <div class="task-image"><img src="partycat.jpeg" alt="Task 3"></div>
+                         </div>
                     </div>
+
                     <button class="slider-btn next">❯</button>
                 </div>
                 <button class="view-all-btn">View all ↗</button>
@@ -192,85 +168,107 @@ Planit is a modern and user-friendly To-Do List web application designed to help
 
 </div>
 <script>
-// Calendar functionality
-const monthYear = document.getElementById("monthYear");
-const daysContainer = document.getElementById("days");
-const fullDate = document.getElementById("fullDate");
-const liveTime = document.getElementById("liveTime");
+// // Calendar functionality
+// const monthYear = document.getElementById("monthYear");
+// const daysContainer = document.getElementById("days");
+// const fullDate = document.getElementById("fullDate");
+// const liveTime = document.getElementById("liveTime");
 
-let date = new Date();
+// let date = new Date();
 
-// Task status data
-const completedDays = [1,2,8,9,15,19,20,27,29];
-const incompleteDays = [12,23];
-const upcomingDays = [31];
+// // Task status data
+// const completedDays = [1,2,8,9,15,19,20,27,29];
+// const incompleteDays = [12,23];
+// const upcomingDays = [31];
 
-function renderCalendar(){
-    const year = date.getFullYear();
-    const month = date.getMonth();
+// function renderCalendar(){
+//     const year = date.getFullYear();
+//     const month = date.getMonth();
 
-    const firstDay = new Date(year, month, 1).getDay();
-    const lastDate = new Date(year, month + 1, 0).getDate();
+//     const firstDay = new Date(year, month, 1).getDay();
+//     const lastDate = new Date(year, month + 1, 0).getDate();
 
-    const months = [
-        "January","February","March","April","May","June",
-        "July","August","September","October","November","December"
-    ];
+//     const months = [
+//         "January","February","March","April","May","June",
+//         "July","August","September","October","November","December"
+//     ];
 
-    monthYear.innerText = months[month] + " " + year;
-    daysContainer.innerHTML = "";
+//     monthYear.innerText = months[month] + " " + year;
+//     daysContainer.innerHTML = "";
 
-    for(let i=0;i<firstDay;i++){
-        daysContainer.innerHTML += "<div></div>";
-    }
+//     for(let i=0;i<firstDay;i++){
+//         daysContainer.innerHTML += "<div></div>";
+//     }
 
-    for(let day=1; day<=lastDate; day++){
-        let className = "";
+//     for(let day=1; day<=lastDate; day++){
+//         let className = "";
 
-        if(completedDays.includes(day)) className="completed";
-        if(incompleteDays.includes(day)) className="incomplete";
-        if(upcomingDays.includes(day)) className="upcoming";
+//         if(completedDays.includes(day)) className="completed";
+//         if(incompleteDays.includes(day)) className="incomplete";
+//         if(upcomingDays.includes(day)) className="upcoming";
 
-        const now = new Date();
-        if(day===now.getDate() && month===now.getMonth() && year===now.getFullYear()){
-            className += " today";
-        }
+//         const now = new Date();
+//         if(day===now.getDate() && month===now.getMonth() && year===now.getFullYear()){
+//             className += " today";
+//         }
 
-        daysContainer.innerHTML += `<div class="day ${className}">${day}</div>`;
-    }
-}
+//         daysContainer.innerHTML += `<div class="day ${className}">${day}</div>`;
+//     }
+// }
 
-document.getElementById("prev").onclick = ()=>{
-    date.setMonth(date.getMonth()-1);
-    renderCalendar();
-};
+// document.getElementById("prev").onclick = ()=>{
+//     date.setMonth(date.getMonth()-1);
+//     renderCalendar();
+// };
 
-document.getElementById("next").onclick = ()=>{
-    date.setMonth(date.getMonth()+1);
-    renderCalendar();
-};
+// document.getElementById("next").onclick = ()=>{
+//     date.setMonth(date.getMonth()+1);
+//     renderCalendar();
+// };
 
-function updateDateTime(){
-    const now = new Date();
-    fullDate.innerText = now.toDateString();
-    liveTime.innerText = now.toLocaleTimeString();
-}
-setInterval(updateDateTime,1000);
+// function updateDateTime(){
+//     const now = new Date();
+//     fullDate.innerText = now.toDateString();
+//     liveTime.innerText = now.toLocaleTimeString();
+// }
+// setInterval(updateDateTime,1000);
 
-updateDateTime();
-renderCalendar();
+// updateDateTime();
+// renderCalendar();
 
-// Slider functionality
-document.querySelector('.slider-btn.prev').addEventListener('click', function() {
-    const slider = document.querySelector('.task-slider');
-    slider.style.transform = 'translateX(-50px)';
-});
+// // Slider functionality
+// document.querySelector('.slider-btn.prev').addEventListener('click', function() {
+//     const slider = document.querySelector('.task-slider');
+//     slider.style.transform = 'translateX(-50px)';
+// });
 
-document.querySelector('.slider-btn.next').addEventListener('click', function() {
-    const slider = document.querySelector('.task-slider');
-    slider.style.transform = 'translateX(50px)';
-});
-</script>
+// document.querySelector('.slider-btn.next').addEventListener('click', function() {
+//     const slider = document.querySelector('.task-slider');
+//     slider.style.transform = 'translateX(50px)';
+// });
 
+// </script>
+<div id="addTaskModal" class="modal" style="display:none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5);">
+        <div class="modal-content" style="background-color: white; margin: 10% auto; padding: 25px; border-radius: 15px; width: 350px; position: relative; box-shadow: 0 5px 15px rgba(0,0,0,0.3); font-family: 'Poppins', sans-serif;">
+            <span onclick="document.getElementById('addTaskModal').style.display='none'" style="position: absolute; right: 20px; top: 15px; cursor: pointer; font-size: 24px; color: #666;">&times;</span>
+            <h3 style="color: #1f2742; margin-bottom: 20px;">Edit Task</h3>
+            
+            <label style="font-size: 12px; color: #666;">Task Title</label>
+            <input type="text" id="taskTitle" style="width: 100%; margin-bottom: 15px; padding: 12px; border-radius: 8px; border: 1px solid #ddd; display: block; box-sizing: border-box;">
+            
+            <label style="font-size: 12px; color: #666;">Priority</label>
+            <select id="taskPriority" style="width: 100%; margin-bottom: 15px; padding: 12px; border-radius: 8px; border: 1px solid #ddd; display: block; box-sizing: border-box;">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
+            <label style="font-size: 12px; color: #666;">Due Time</label>
+<input type="time" id="taskTime" style="width: 100%; margin-bottom: 20px; padding: 12px; border-radius: 8px; border: 1px solid #ddd; display: block; box-sizing: border-box;">
+
+            
+            <button id="addTaskBtn" style="width: 100%; padding: 12px; background: #1f2742; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 16px;">Update Task</button>
+        </div>
+    </div>
+<script src="dashboard.js"></script>
 </body>
 </html>

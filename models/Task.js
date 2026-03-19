@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 const taskSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User', // Reference to user (Foreign Key)
+        ref: 'User', 
         required: true
-    },
+    },  
     title: {
         type: String,
         required: [true, 'Task title is required'],
@@ -17,7 +17,7 @@ const taskSchema = new mongoose.Schema({
     status: {
         type: String,
         enum: ['pending', 'completed'],
-        default: 'pending' // Default: pending
+        default: 'pending'
     },
     priority: {
         type: String,
@@ -40,10 +40,10 @@ const taskSchema = new mongoose.Schema({
     }
 });
 
-// Automatically update the 'updatedAt' field on save
-taskSchema.pre('save', function(next) {
+// FIX: Update 'updatedAt' without using 'next'
+// Mongoose handles this automatically for synchronous hooks
+taskSchema.pre('save', function() {
     this.updatedAt = Date.now();
-    next();
 });
 
 module.exports = mongoose.model('Task', taskSchema);

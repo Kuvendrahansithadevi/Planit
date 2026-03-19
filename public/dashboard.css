@@ -284,11 +284,14 @@ body {
     width: 200px;
     height: 200px;
     border-radius: 50%;
-    background: conic-gradient(#1f2742 0% 60%, #e0e0e0 60% 100%);
+    /* Static percentages teesi variable pettu */
+    background: conic-gradient(#1f2742 0% var(--p), #e0e0e0 var(--p) 100%);
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
+    /* transition add chesthe smooth ga fill avthundi */
+    transition: --p 0.5s orange; 
 }
 
 
@@ -336,40 +339,52 @@ body {
 }
 
 .task-slider {
-    display: flex;
+   display: flex;
     align-items: center;
-    gap: 20px;
-    margin-bottom: 20px;
-    overflow: hidden;
+    position: relative;
+    overflow: hidden; /* Extra cards ni hide chestundi */
+    width: 250px; /* Nee Image width entha undo anthe pettu, example: 250px */
+    margin: 0 auto;
 }
-
+.slider-wrapper {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: 100%;
+}
 .slider-btn {
-    background: none;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-    color: #1f2742;
-    padding: 8px 12px;
-    border-radius: 50%;
-    transition: all 0.3s ease;
+    position: absolute; /* Flow nundi teesi sides ki fix chestundi */
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    background: white; /* Arrows clear ga kanapadadaniki */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+/* Ee specific positions lekunte arrows kanapadavu */
+.slider-btn.prev {
+    left: 5px; /* Left side margin */
 }
 
+.slider-btn.next {
+    right: 5px; /* Right side margin */
+}
+
+/* Hover effect lo translate toggle avvakunda chusko */
 .slider-btn:hover {
     background: #f0f0f0;
-    transform: scale(1.2) rotate(10deg);
+    transform: translateY(-50%) scale(1.2); /* Scale chesthu translateY ni maintain cheyali */
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 .task-card {
-    flex: 1;
+   flex: 0 0 100%; /* Ikkada 100% pettadam valla next card hide avtundi */
+    width: 100%;
     display: flex;
-    align-items: center;
     justify-content: center;
-    min-height: 250px;
 }
 
 .task-image {
-    width: 220px;
+    width: 100%;
+    max-width: 220px;
     height: 250px;
     border-radius: 12px;
     overflow: hidden;
@@ -495,6 +510,7 @@ body {
     grid-template-columns: repeat(7, 1fr);
     gap: 6px;
     margin-bottom: 15px;
+    min-height: 200px;
 }
 
 /* individual day cells styled like calendar.html */
@@ -649,6 +665,7 @@ body {
     padding: 25px;
     border-radius: 15px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    min-height: 300px;
     animation: slideInUp 0.8s ease-out 0.2s backwards;
     transition: all 0.3s ease;
 }

@@ -26,7 +26,13 @@ router.post('/login', async (req, res) => {
         if (!user || user.password !== password) {
             return res.status(401).json({ error: "Invalid email or password" });
         }
-        res.status(200).json({ message: "Login successful!", userName: user.name });
+        
+        // ADD user._id HERE so the frontend can save it
+        res.status(200).json({ 
+            message: "Login successful!", 
+            userName: user.name,
+            userId: user._id 
+        });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }

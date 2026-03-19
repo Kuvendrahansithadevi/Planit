@@ -30,6 +30,24 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'login.html')); 
 });
 
+// Profile data fetch chese route
+app.get('/api/user/profile/:userId', async (req, res) => {
+    try {
+        const user = await User.findById(req.params.userId);
+        if (!user) return res.status(404).json({ message: "User not found" });
+
+        // Database lo field 'name' kabatti, user.name ani pampali
+        res.json({
+            name: user.name, 
+            email: user.email,
+            phone: user.phone || "+91 9876xxxxxx",
+            // ... stats logic ...
+        });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
 // --- MongoDB Connection ---
 mongoose.connect(process.env.MONGO_URI, {
     family: 4 
@@ -38,6 +56,20 @@ mongoose.connect(process.env.MONGO_URI, {
 .catch(err => {
     console.log("❌ Connection Error Detail:");
     console.error(err.message);
+});
+
+app.put('/api/user/profile/:userId', async (req, res) => {
+    try {
+        const { username, email, phone } = req.body;
+        const updatedUser = await User.findByIdAndUpdate(
+            req.params.userId,
+            { username, email, phone },
+            { new: true } // Updated document ni return chestundi
+        );
+        res.json(updatedUser);
+    } catch (err) {
+        res.status(500).json({ message: "Update failed" });
+    }
 });
 
 // --- Start Server ---
