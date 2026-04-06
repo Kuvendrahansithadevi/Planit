@@ -23,6 +23,7 @@ async function fetchTasks() {
 
         renderCalendar();
         renderFilteredTasks(); 
+        updateBellAlerts();
     } catch (err) {
         console.error("Error fetching tasks:", err);
     }
@@ -193,31 +194,46 @@ function renderCalendar(){
 
     for(let i=0; i<firstDay; i++) daysBox.innerHTML += "<div></div>";
     
-    for(let day=1; day<=lastDate; day++){
-        const isToday = (day === new Date().getDate() && month === new Date().getMonth() && year === new Date().getFullYear()) ? 'today' : '';
-        const isSelected = (day === selectedDate.getDate() && month === selectedDate.getMonth() && year === selectedDate.getFullYear()) ? 'selected-day' : '';
-         
-        const currentLoopDate = new Date(year,month,day).toDateString();
-        const dayTasks = allTasks.filter(t=>new Date(t.dueDate).toDateString()===currentLoopDate);
+   for(let day=1; day<=lastDate; day++){
+    const isToday = (day === new Date().getDate() && month === new Date().getMonth() && year === new Date().getFullYear()) ? 'today' : '';
+    const isSelected = (day === selectedDate.getDate() && month === selectedDate.getMonth() && year === selectedDate.getFullYear()) ? 'selected-day' : '';
+    
+    const currentLoopDate = new Date(year, month, day);
+    const dateStr = currentLoopDate.toDateString();
+    const dayTasks = allTasks.filter(t => new Date(t.dueDate).toDateString() === dateStr);
 
-        let statusClass="";
+    let statusClass = "";
 
-        if(dayTasks.length>0){
-            const hasPending = dayTasks.some(t=>t.status==='pending');
-            statusClass = hasPending ? 'incomplete' : 'completed';
+    if(dayTasks.length > 0) {
+        const hasPending = dayTasks.some(t => t.status === 'pending');
+        
+        if (!hasPending) {
+            statusClass = 'completed'; // Green: Anni completed
+        } else {
+            // Task pending undi, ippudu date check cheyali
+            const today = new Date();
+            today.setHours(0, 0, 0, 0); 
+
+            if (currentLoopDate > today) {
+                statusClass = 'upcoming'; // Yellow: Future pending tasks
+            } else {
+                statusClass = 'incomplete'; // Black: Today or Past pending tasks
+            }
         }
-        const dayEl = document.createElement('div');
-        dayEl.className = `day ${statusClass} ${isToday} ${isSelected}`;
-        dayEl.innerText = day;
-        
-        dayEl.onclick = () => {
-            selectedDate = new Date(year, month, day);
-            renderCalendar();
-            renderFilteredTasks();
-        };
-        
-        daysBox.appendChild(dayEl);
     }
+
+    const dayEl = document.createElement('div');
+    dayEl.className = `day ${statusClass} ${isToday} ${isSelected}`;
+    dayEl.innerText = day;
+    
+    dayEl.onclick = () => {
+        selectedDate = new Date(year, month, day);
+        renderCalendar();
+        renderFilteredTasks();
+    };
+    
+    daysBox.appendChild(dayEl);
+}
 }
 
 const btnPrev = document.getElementById("prev");
@@ -269,6 +285,62 @@ function updateSlider() {
     if (sliderWrapper) {
         const offset = -currentSlide * 100;
         sliderWrapper.style.transform = `translateX(${offset}%)`;
+    }
+}
+// --- 5. NOTIFICATION & BELL LOGIC ---
+
+const bellBtn = document.getElementById('bellIcon');
+const notifDropdown = document.getElementById('notifDropdown');
+const notifList = document.getElementById('notifList');
+
+// Bell click chesinappudu dropdown chupinchadaniki
+if (bellBtn) {
+    bellBtn.onclick = () => {
+        // Dropdown display toggle chestunnam
+        notifDropdown.style.display = notifDropdown.style.display === 'none' ? 'block' : 'none';
+    };
+}
+
+// Window meeda ekkada click chesina dropdown close ayyela
+window.addEventListener('click', (e) => {
+    if (notifDropdown && !notifDropdown.contains(e.target) && e.target !== bellBtn) {
+        notifDropdown.style.display = 'none';
+    }
+});
+
+// Urgent tasks ni check chesi bell daggara badge chupinchali
+function updateBellAlerts() {
+    const now = new Date().getTime(); // Current time in MS
+    const bellIcon = document.getElementById('bellIcon');
+    const notifList = document.getElementById('notifList');
+
+    if (!allTasks || allTasks.length === 0) return;
+
+    const urgentTasks = allTasks.filter(task => {
+        if (task.status !== 'pending') return false;
+
+        const taskTime = new Date(task.dueDate).getTime(); // Task time in MS
+        const diffInMins = (taskTime - now) / (1000 * 60);
+
+        // Console lo chudu, values minus lo unnaya leka 30 kante ekkuva unnaya
+        console.log(`Task: ${task.title} | Minutes Left: ${Math.round(diffInMins)}`);
+
+        // Logic: 0 minutes nundi 30 minutes lopala unte urgent
+        return diffInMins > 0 && diffInMins <= 30;
+    });
+
+    if (urgentTasks.length > 0) {
+        // Red Badge chupinchu
+        bellIcon.innerHTML = '🔔<span class="badge" style="position:absolute; top:-2px; right:-2px; background:red; color:white; border-radius:50%; width:15px; height:15px; display:flex; align-items:center; justify-content:center; font-size:10px; font-weight:bold;">!</span>';
+        
+        notifList.innerHTML = urgentTasks.map(t => `
+            <div class="notif-item" style="padding:10px; border-bottom:1px solid #eee; font-size:12px; color:#1f2742;">
+                <b>Reminder:</b> ${t.title} starts soon!
+            </div>
+        `).join('');
+    } else {
+        bellIcon.innerHTML = '🔔';
+        notifList.innerHTML = '<p style="padding:10px; font-size:12px; color:gray;">No urgent reminders</p>';
     }
 }
 

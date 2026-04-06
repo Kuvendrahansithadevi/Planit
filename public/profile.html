@@ -1,18 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Planit Profile</title>
     <link rel="stylesheet" href="profile.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); }
-        .modal-content { background: white; margin: 10% auto; padding: 25px; width: 350px; border-radius: 20px; text-align: center; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
-        .modal-content h3 { margin-bottom: 20px; color: #1f2742; }
-        .modal-content input { width: 90%; margin: 10px 0; padding: 12px; border: 1px solid #eee; border-radius: 10px; font-family: 'Poppins'; }
-        .btn-group { margin-top: 20px; display: flex; justify-content: space-around; }
-        .save-btn { background: #1f2742; color: white; padding: 10px 25px; border: none; border-radius: 8px; cursor: pointer; }
-        .cancel-btn { background: #f0f0f0; padding: 10px 25px; border: none; border-radius: 8px; cursor: pointer; }
-    </style>
 </head>
 <body>
 
@@ -21,11 +13,11 @@
         <img src="Plogo.png" alt="logo" class="logo-img">
         <span class="logo-text">Planit</span>
     </div>
-    <nav>
-        <a href="dashboard.html">Dashboard</a>
-        <a>About</a>
-        <a>Services</a>
-        <a class="active">Profile</a>
+    <nav class="nav-links">
+        <a href="dashboard.html" class="nav-item">Dashboard</a>
+        <a href="#" class="nav-item">About</a>
+        <a href="#" class="nav-item">Services</a>
+        <a href="profile.html" class="nav-item active">Profile</a>
     </nav>
 </header>
 
@@ -34,8 +26,7 @@
         <img src="profile.jpeg" class="avatar">
         <h2 class="name" id="userName">Loading...</h2>
         <div class="info">
-            <p><strong>Email</strong> : <span id="userEmail">cat@email.com</span></p>
-            <p><strong>Phone</strong> : <span id="userPhone">+91 9876xxxxxx</span></p>
+            <p><strong>Email</strong> : <span id="userEmail">loading...</span></p>
         </div>
         <button id="openEditModal">Edit Profile</button>
     </div>
@@ -60,7 +51,6 @@
     <div class="modal-content">
         <h3>Edit Profile</h3>
         <input type="text" id="inputName" placeholder="Full Name">
-        <input type="text" id="inputPhone" placeholder="Phone Number">
         <div class="btn-group">
             <button class="cancel-btn" onclick="closeModal()">Cancel</button>
             <button class="save-btn" id="saveProfile">Save Changes</button>
